@@ -1,0 +1,213 @@
+html, body { margin: 0; padding: 0; }
+body { background-color: rgb(59,89,152); }
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row { margin-bottom: 10px; }
+
+#funny_fish {
+  width: 350px;
+  height: 254px;
+}
+
+#funny_fish img {
+  margin: auto;
+  width: 350px;
+  height: 254px;
+}
+
+#welcome {
+  margin: auto;
+  width: 350px;
+  padding: 10px;
+  font-family: Raleway, 'Helvetica Neue', Helvetica, pragmatica-web, Arial, sans-serif;
+  color: white;
+}
+
+#player {
+  margin: auto;
+  padding: 20px;
+  font-family: Raleway, 'Helvetica Neue', Helvetica, pragmatica-web, Arial, sans-serif;
+  color: white;
+}
+
+#player_header {
+  margin: auto;
+  width: 500px;
+}
+
+#game_options {  }
+
+#user_name,
+#user_id {
+  padding: 15px;
+  width: 100%;
+  font-size: 16px;
+  color: rgb(59,89,152);
+  box-sizing: border-box;
+}
+#user_name,
+#user_id { border: 0; }
+
+#user_name {  }
+#user_id {  }
+
+#start_playing {
+  display: block;
+  margin: 30px auto 30px auto;
+  border: 0;
+  border-radius: 5px;
+  background-color: #49a942;
+  color: white;
+  width: 250px;
+  padding: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#opponents_caption {
+  margin-top: 30px;
+}
+
+#number_of_opponents {
+  margin: auto;
+  border: 0;
+  background-color: white;
+  /*width: 328px;*/
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 0px;
+  color: rgb(59,89,152);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#card_table {
+  width: 500px;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: rgb(78,156,60);
+  border-radius: 5px;
+}
+
+#your_hand {
+  float: left;
+  width: 100%;
+}
+#your_hand_caption {}
+#your_hand_cards { margin-left: 10px; }
+.big-card {
+  width: 100%;
+  height: 100%;
+}
+.your-card {
+  float: left;
+  margin-right: 3px;
+  height: auto;
+  width: auto;
+  max-width: 41px;
+  max-height: 66px;
+  cursor: pointer;
+}
+.your-card img {
+  height: 66px;
+  width: 41px;
+}
+#your_books { float: left; width: 50%; }
+.your-book { float: left; margin-right: -31px; }
+.your-book img { width: 41px; height: 66px; }
+
+#opponents { float: left; width: 100%; border-top: 1px dotted rgb(59,89,152); }
+.opponent { float: left; width: 100%; margin-top: 10px; }
+#opponent_0_hand,
+#opponent_1_hand,
+#opponent_2_hand,
+#opponent_3_hand,
+#opponent_4_hand,
+#opponent_5_hand,
+#opponent_6_hand { float: left; width: 100%; }
+.opponent-hand { margin-left: 10px; }
+.opponent-hand-caption { cursor: pointer; }
+.opponent-hand-cards { margin-left: 10px; }
+.opponent-card {
+  float: left;
+  margin-right: -31px;
+  height: auto;
+  width: auto;
+  max-width: 41px;
+  max-height: 66px;
+}
+.opponent-card img {
+  height: 66px;
+  width: 41px;
+}
+.opponent-name,
+.opponent-name:hover,
+.opponent-name:visited {
+  margin-bottom: 10px;
+  text-decoration: none;
+  border-bottom: 1px rgb(59,89,152) dotted;
+  color: rgb(6,69,173);
+}
+.opponent-name:hover {
+  border-bottom: 1px rgb(59,89,152) solid;
+}
+#opponent_0_books,
+#opponent_1_books,
+#opponent_2_books,
+#opponent_3_books,
+#opponent_4_books,
+#opponent_5_books,
+#opponent_6_books { float: left; width: 50%; }
+.opponent-book { float: left; margin-right: -31px }
+.opponent-book img { width: 41px; height: 66px; }
+
+#fish_pond {
+  float: left;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#messages {
+  padding: 15px;
+  height: auto;
+  min-height: 36px;
+  min-width: 50px;
+  margin-bottom: 20px;
+  background-color: white;
+  color: rgb(59,89,152);
+  box-sizing: border-box;
+  white-space: pre;
+}
+
+/*
+For desktop:
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+*/

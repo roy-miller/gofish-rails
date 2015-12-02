@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title GoFish
+    link rel="stylesheet" type="text/css" href="/assets/gofish.css"
+
+  body
+    div#welcome.group
+      div#funny_fish
+        img src="/assets/funny_fish.png"
+      h1#welcome_header Welcome, to GoFish!
+      form#game_options action="/start" method="post"
+        div.row
+          input#user_name name="user_name" type="text" placeholder="Enter username"
+        div.row
+          input#user_id name="user_id" type="text" placeholder="Enter user id if you have one"
+        div.row
+          p#opponents_caption Number of people you want to play
+          select#number_of_opponents name="number_of_opponents"
+            - (1..6).each do |value|
+              option value="#{value}" = value
+        div.row
+          input#start_playing type="submit" value="Play"

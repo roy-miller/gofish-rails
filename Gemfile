@@ -9,7 +9,7 @@ gem 'jquery-rails',         '4.0.5'
 gem 'turbolinks',           '2.5.3'
 gem 'jbuilder',             '2.3.2'
 gem 'sdoc',                 '0.4.1', group: :doc
-gem 'slim',                 '3.0.6'
+gem 'slim-rails',           '3.0.1'
 gem 'pusher',               '0.15.1'
 gem 'rake',                 '10.4.2'
 gem 'pg',                   '0.18.4'

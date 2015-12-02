@@ -1,6 +1,8 @@
+require 'spinach-rails'
 ENV['RAILS_ENV'] = 'test'
 require './config/environment'
-require 'rspec'
+
+require 'rspec/rails'
 require 'minitest/spec'
 require 'database_cleaner'
 require 'capybara'

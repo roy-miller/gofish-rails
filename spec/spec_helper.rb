@@ -8,8 +8,6 @@ require 'factory_girl'
 require 'database_cleaner'
 require 'pry'
 
-#Dir[File.join(File.dirname(__FILE__), "..", "lib" , "**.rb")].each { |f| require f }
-#Dir[File.join(File.dirname(__FILE__), "..", "spec/factories" , "**.rb")].each { |f| require f }
 $:.unshift File.expand_path '../../app/models', __FILE__
 
 RSpec.configure do |config|
