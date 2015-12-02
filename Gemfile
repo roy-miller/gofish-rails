@@ -19,16 +19,16 @@ group :development, :test do
   gem 'byebug',             '8.2.1'
   gem 'web-console',        '2.2.1'
   gem 'spring',             '1.5.0'
+  gem 'rspec-rails',        '3.4.0'
+  gem 'spinach-rails',      '0.2.1'
 end
 
 group :test do
-  gem 'rspec',              '3.4.0'
   gem 'pry',                '0.10.3'
   gem 'pry-byebug',         '3.3.0'
   gem 'capybara',           '2.5.0'
   gem 'poltergeist',        '1.8.0'
   gem 'selenium-webdriver', '2.48.1'
-  gem 'factory_girl',       '4.5.0'
+  gem 'factory_girl_rails', '4.5.0'
   gem 'database_cleaner',   '1.5.1'
-  gem 'spinach',            '0.8.10'
 end
