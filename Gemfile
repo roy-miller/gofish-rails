@@ -1,0 +1,34 @@
+source 'https://rubygems.org'
+
+gem 'rails',                '4.2.5'
+gem 'sass-rails',           '5.0.4'
+gem 'uglifier',             '2.7.2'
+gem 'coffee-rails',         '4.1.0'
+# gem 'therubyracer', platforms: :ruby
+gem 'jquery-rails',         '4.0.5'
+gem 'turbolinks',           '2.5.3'
+gem 'jbuilder',             '2.3.2'
+gem 'sdoc',                 '0.4.1', group: :doc
+gem 'slim',                 '3.0.6'
+gem 'pusher',               '0.15.1'
+gem 'rake',                 '10.4.2'
+gem 'pg',                   '0.18.4'
+
+group :development, :test do
+  gem 'sqlite3',            '1.3.11'
+  gem 'byebug',             '8.2.1'
+  gem 'web-console',        '2.2.1'
+  gem 'spring',             '1.5.0'
+end
+
+group :test do
+  gem 'rspec',              '3.4.0'
+  gem 'pry',                '0.10.3'
+  gem 'pry-byebug',         '3.3.0'
+  gem 'capybara',           '2.5.0'
+  gem 'poltergeist',        '1.8.0'
+  gem 'selenium-webdriver', '2.48.1'
+  gem 'factory_girl',       '4.5.0'
+  gem 'database_cleaner',   '1.5.1'
+  gem 'spinach',            '0.8.10'
+end
