@@ -67,10 +67,10 @@ describe Match do
     it 'identifies the winning user and marks the match finished' do
       match.match_users.first.player.books << Book.new
       match.send(:end_match)
-      expect(match.winner_id).to be users.first.id
+      expect(match.winner).to be users.first
       match.save!
       saved_match = Match.find(match.id)
-      expect(saved_match.winner_id).to be users.first.id
+      expect(saved_match.winner).to be users.first
       expect(saved_match.status).to eq MatchStatus::FINISHED
     end
 
