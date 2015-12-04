@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :users
   root 'welcome#index'
+  post '/start', to: 'start#index'
+  post '/request_card', to: 'card_request#make_request'
+  get  '/matches/:match_id/users/:user_id', to: 'match_state#state'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

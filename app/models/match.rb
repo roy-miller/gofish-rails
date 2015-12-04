@@ -4,6 +4,7 @@ require 'user'
 require 'player'
 require 'game'
 require 'match_user'
+require 'match_client_notifier'
 require 'robot_user'
 
 class Match < ActiveRecord::Base
@@ -12,8 +13,10 @@ class Match < ActiveRecord::Base
   serialize :game
   serialize :observers
   after_initialize :set_up_match # unless persisted? or if: :new_record?
+  after_save :notify_observers, unless: :skip_callbacks_for_test
 
   attr_accessor :match_users
+  attr_writer :skip_callbacks_for_test
 
   def set_up_match
     self.game ||= make_game
@@ -22,8 +25,12 @@ class Match < ActiveRecord::Base
     self.observers ||= []
   end
 
-  def notify_observers(*args)
-    self.observers.each { |observer| observer.update(args) }
+  def skip_callbacks_for_test
+    @skip_callbacks_for_test ||= false
+  end
+
+  def notify_observers
+    self.observers.each { |observer| observer.update(self) }
   end
 
   def add_observer(observer)
@@ -100,8 +107,8 @@ class Match < ActiveRecord::Base
     add_message("It's #{self.current_player.name}'s turn")
     end_match if over?
     draw_card_for_user(self.current_player) if !over? && match_user_for(self.current_player).out_of_cards?
-    save!
-    notify_observers
+    #save!
+    #notify_observers
   end
 
   def current_player

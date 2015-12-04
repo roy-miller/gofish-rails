@@ -1,7 +1,7 @@
 var PlayerView = function PlayerView(matchId, playerId, logging) {
   this.matchId = matchId;
   this.playerId = playerId;
-  this.playerUrl = "http://localhost:4567/matches/" + this.matchId + "/users/" + this.playerId;
+  this.playerUrl = "/matches/" + this.matchId + "/users/" + this.playerId;
   if(logging) {
     Pusher.log = function(message) {
      if (window.console && window.console.log) {

@@ -36,6 +36,7 @@ class MatchPerspective
     hash[:deck_card_count] = @deck_card_count
     hash[:cards] = @player.hand.map { |card| { rank: card.rank, suit: card.suit } }
     hash[:opponents] = @opponents
+    binding.pry
     hash
   end
 

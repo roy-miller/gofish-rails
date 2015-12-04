@@ -16,6 +16,8 @@ gem 'pg',                   '0.18.4'
 
 group :development, :test do
   gem 'sqlite3',            '1.3.11'
+  gem 'pry-rails',          '0.3.4'
+  gem 'pry-byebug',         '3.3.0'
   gem 'byebug',             '8.2.1'
   gem 'web-console',        '2.2.1'
   gem 'spring',             '1.5.0'
@@ -24,8 +26,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'pry',                '0.10.3'
-  gem 'pry-byebug',         '3.3.0'
   gem 'capybara',           '2.5.0'
   gem 'poltergeist',        '1.8.0'
   gem 'selenium-webdriver', '2.48.1'

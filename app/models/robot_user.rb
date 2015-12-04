@@ -3,6 +3,7 @@ require_relative './user'
 
 class RobotUser < User
   attr_accessor :think_time
+  attr_reader :match
   after_initialize :set_defaults
   after_create :set_name
 
@@ -12,7 +13,7 @@ class RobotUser < User
   end
 
   def set_name
-    self.name = "robot#{self.id}"
+    update_attribute(:name, "robot#{self.id}")
   end
 
   def observe_match(match)
@@ -20,27 +21,25 @@ class RobotUser < User
   end
 
   def update(*args)
-    make_request if (active_match.current_player == self)
+    @match = args.first
+    make_request(match) if (match.current_player == self)
   end
 
-  def make_request
+  def make_request(match)
     contemplate_before {
-      active_match.ask_for_cards(requestor: self, recipient: pick_opponent, card_rank: pick_rank)
+      match.ask_for_cards(requestor: self, recipient: pick_opponent, card_rank: pick_rank)
+      match.save!
     }
   end
 
-  def active_match
-    self.matches.first
-  end
-
   def player
-    active_match.player_for(self)
+    match.player_for(self)
   end
 
   protected
 
   def opponents
-    active_match.opponents_for(self)
+    match.opponents_for(self)
   end
 
   def pick_opponent

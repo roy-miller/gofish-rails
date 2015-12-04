@@ -21,7 +21,7 @@ html
             #your_hand_cards
               - for card in @perspective.player.hand
                 a.your-card data-rank="#{card.rank.downcase}" data-suit="#{card.suit.downcase}"
-                  img src="/images/#{card.suit.downcase}#{card.rank.downcase}.png"
+                  img src="/assets/#{card.suit.downcase}#{card.rank.downcase}.png"
             input#selected_card_rank type="hidden" value=""
         .row
           #fish_pond
@@ -38,7 +38,7 @@ html
                 .opponent-hand-cards
                   - opponent[:card_count].times
                     .opponent-card
-                      img src="/images/backs_blue.png"
+                      img src="/assets/backs_blue.png"
     javascript:
       var playerView;
       $(document).ready(function() {
