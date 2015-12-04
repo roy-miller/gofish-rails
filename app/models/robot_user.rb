@@ -1,5 +1,5 @@
-require_relative './match'
-require_relative './user'
+require 'match'
+require 'user'
 
 class RobotUser < User
   attr_accessor :think_time

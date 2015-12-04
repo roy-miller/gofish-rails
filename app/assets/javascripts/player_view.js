@@ -104,7 +104,7 @@ PlayerView.prototype.updatePlayerCards = function() {
     card_element.setAttribute('data-suit', card.suit);
     card_element.onclick = function() { self.setSelectedCardRank(card.rank); };
     var card_image = document.createElement('img');
-    card_image.src = '/images/' + card.suit.toLowerCase() + card.rank.toLowerCase() + '.png';
+    card_image.src = '/assets/' + card.suit.toLowerCase() + card.rank.toLowerCase() + '.png';
     card_element.appendChild(card_image);
     self.playerHandElement().appendChild(card_element);
   });
@@ -120,7 +120,7 @@ PlayerView.prototype.updateOpponents = function() {
       var card_element = document.createElement('div');
       card_element.className = 'opponent-card';
       var card_image = document.createElement('img');
-      card_image.src = '/images/backs_blue.png';
+      card_image.src = '/assets/backs_blue.png';
       card_element.appendChild(card_image);
       self.opponentHandElement(index).appendChild(card_element);
     }

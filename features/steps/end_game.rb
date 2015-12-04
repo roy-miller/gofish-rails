@@ -10,8 +10,17 @@ class Spinach::Features::EndGame < Spinach::FeatureSteps
     @match.save!
   end
 
+  step 'I have a book' do
+    give_nines_book(@me)
+    @match.save!
+  end
+
   step 'the match tells me the game is over' do
     visit_player_page
     expect(page.has_content?(/game over/i)).to be true
+  end
+
+  step 'the match stores me as the winner' do
+    expect(@match.winner.id).to be @me.id
   end
 end

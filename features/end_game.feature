@@ -6,6 +6,7 @@ Feature: End game
   Background:
     Given a game with three players
     And a deck with one card left
+    And I have a book
 
   @javascript
   Scenario: I go fish, deck runs out of cards, game ends
@@ -14,6 +15,7 @@ Feature: End game
     When I ask my first opponent for cards he does not have
     Then I go fishing
     And the match tells me the game is over
+    And the match stores me as the winner
 
   @javascript
   Scenario: An opponent goes fish, deck runs out of cards, game ends
@@ -21,3 +23,4 @@ Feature: End game
     When my first oppponent asks me for cards I do not have
     Then my first opponent goes fishing
     And the match tells me the game is over
+    And the match stores me as the winner

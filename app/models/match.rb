@@ -9,7 +9,8 @@ require 'robot_user'
 
 class Match < ActiveRecord::Base
   has_and_belongs_to_many :users, -> { order('matches_users.id ASC') }
-  has_one :winner, class_name: 'User', foreign_key: 'winner_id'
+  #has_one :winner, -> { where(id: self.winner_id) }, class_name: 'User'
+  #has_one :winner, class_name: 'User', foreign_key: 'id'
   serialize :game
   serialize :observers
   after_initialize :set_up_match # unless persisted? or if: :new_record?
@@ -107,8 +108,6 @@ class Match < ActiveRecord::Base
     add_message("It's #{self.current_player.name}'s turn")
     end_match if over?
     draw_card_for_user(self.current_player) if !over? && match_user_for(self.current_player).out_of_cards?
-    #save!
-    #notify_observers
   end
 
   def current_player
@@ -142,6 +141,10 @@ class Match < ActiveRecord::Base
     MatchPerspective.new(match: self, user: user)
   end
 
+  def winner
+    User.find(self.winner_id)
+  end
+
   private
 
   def make_game
@@ -154,5 +157,6 @@ class Match < ActiveRecord::Base
     winner = user_for_player(self.game.winner)
     add_message("GAME OVER - #{winner.name} won!")
     self.winner_id = winner.id
+    self.status = MatchStatus::FINISHED
   end
 end

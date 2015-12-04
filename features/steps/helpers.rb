@@ -140,4 +140,10 @@ module Helpers
   def give_ten(user)
     give_card(user: user, rank: '10')
   end
+
+  def give_nines_book(user)
+    book = build(:book, :nines)
+    @match.player_for(user).books << book
+    book
+  end
 end

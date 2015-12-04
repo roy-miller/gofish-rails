@@ -1,9 +1,8 @@
 describe Match do
   let(:users) { create_list(:user, 2) }
+  let(:match) { build(:match, users: users) }
 
-  context 'with database' do
-    let!(:match) { build(:match, users: users) }
-
+  context 'in progress' do
     it 'saves to database successfully' do
       match.messages << "should save"
       match.save!
@@ -17,10 +16,6 @@ describe Match do
       expect(stored_match.messages).to include("should save")
       expect(stored_match.over?).to be false
     end
-  end
-
-  context 'without database' do
-    let(:match) { build(:match, users: users) }
 
     it 'adds and notifies observers' do
       first_observer = spy('observer1')
@@ -61,7 +56,7 @@ describe Match do
     end
 
     it 'moves play to the next user after the current one' do
-      match
+      #match
       match.game.current_player = match.match_users.first.player
       match.move_play_to_next_user
       expect(match.current_player).to be match.match_users.last.user
@@ -69,10 +64,14 @@ describe Match do
       expect(match.current_player).to be match.match_users.first.user
     end
 
-    it 'identifies the winning user' do
+    it 'identifies the winning user and marks the match finished' do
       match.match_users.first.player.books << Book.new
       match.send(:end_match)
       expect(match.winner_id).to be users.first.id
+      match.save!
+      saved_match = Match.find(match.id)
+      expect(saved_match.winner_id).to be users.first.id
+      expect(saved_match.status).to eq MatchStatus::FINISHED
     end
 
     it 'asks for cards, updates player hands when user has no cards of requested rank' do
