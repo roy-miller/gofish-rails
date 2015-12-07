@@ -1,5 +1,4 @@
 class StartController < ApplicationController
-  #@@match_maker = MatchMaker.new
   MyMatchMaker ||= MatchMaker.new
 
   def wait

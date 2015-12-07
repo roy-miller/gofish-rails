@@ -43,6 +43,17 @@ module Helpers
     @match.save!
   end
 
+  def create_completed_match(winner:, losers:)
+    users = [winner, losers].flatten!
+    match = create(:match, users: users)
+    match.status = MatchStatus::FINISHED
+    match.game.deck.cards = []
+    match.player_for(winner).books << build(:book, :nines)
+    match.winner = winner
+    match.save!
+    match
+  end
+
   def deck_has_two_cards
     @match.game.deck.cards = [build(:card, rank: '2', suit: 'S'), build(:card, rank: '3', suit: 'S')]
   end

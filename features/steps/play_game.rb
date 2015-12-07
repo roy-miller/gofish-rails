@@ -48,6 +48,7 @@ class Spinach::Features::PlayGame < Spinach::FeatureSteps
   end
 
   step 'my first opponent gets the cards' do
+    # TODO convert to view-based checking
     expect(@match.player_for(@first_opponent).hand).to include(@my_hand_before_asking.last)
     expect(@me.player.hand).to be_empty
   end
