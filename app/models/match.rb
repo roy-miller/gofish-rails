@@ -135,10 +135,6 @@ class Match < ActiveRecord::Base
     MatchPerspective.new(match: self, user: user)
   end
 
-  def winner
-    User.find(self.winner_id)
-  end
-
   private
 
   def make_game
