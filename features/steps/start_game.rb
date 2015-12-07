@@ -33,7 +33,6 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
 
   step 'no other player joins in time' do
     sleep 5 # TODO anything less doesn't work consistently
-    File.open("/Users/roymiller/roylog.txt", 'a') {|f| f.write("waited 5 seconds after request\n\n") }
   end
 
   step 'the game starts' do

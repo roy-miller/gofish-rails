@@ -65,13 +65,11 @@ describe Match do
     end
 
     it 'identifies the winning user and marks the match finished' do
-      match.match_users.first.player.books << Book.new
+      winner = match.users.first
+      match.player_for(winner).books << Book.new
       match.send(:end_match)
-      expect(match.winner_id).to be users.first.id
-      match.save!
-      saved_match = Match.find(match.id)
-      expect(saved_match.winner_id).to be users.first.id
-      expect(saved_match.status).to eq MatchStatus::FINISHED
+      expect(match.winner).to eq winner
+      expect(match.status).to eq MatchStatus::FINISHED
     end
 
     it 'asks for cards, updates player hands when user has no cards of requested rank' do

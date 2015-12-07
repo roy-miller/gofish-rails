@@ -1,16 +1,10 @@
-require 'match_status'
-require 'request'
-require 'user'
-require 'player'
-require 'game'
-require 'match_user'
-require 'match_client_notifier'
-require 'robot_user'
-
 class Match < ActiveRecord::Base
   has_and_belongs_to_many :users, -> { order('matches_users.id ASC') }
+  #has_many :participations
+  #has_many :users, through: :participations
   #has_one :winner, -> { where(id: self.winner_id) }, class_name: 'User'
   #has_one :winner, class_name: 'User', foreign_key: 'id'
+  belongs_to :winner, class_name: 'User', foreign_key: 'winner_id'
   serialize :game
   serialize :observers
   after_initialize :set_up_match # unless persisted? or if: :new_record?
@@ -154,9 +148,8 @@ class Match < ActiveRecord::Base
   end
 
   def end_match
-    winner = user_for_player(self.game.winner)
+    self.winner = user_for_player(game.winner)
     add_message("GAME OVER - #{winner.name} won!")
-    self.winner_id = winner.id
     self.status = MatchStatus::FINISHED
   end
 end
