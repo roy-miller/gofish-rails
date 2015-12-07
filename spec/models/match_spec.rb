@@ -56,7 +56,6 @@ describe Match do
     end
 
     it 'moves play to the next user after the current one' do
-      #match
       match.game.current_player = match.match_users.first.player
       match.move_play_to_next_user
       expect(match.current_player).to be match.match_users.last.user
