@@ -20,7 +20,6 @@ class Spinach::Features::UserRankings < Spinach::FeatureSteps
   end
 
   step 'I see my ranking' do
-    page.save_screenshot('/Users/roymiller/gofish.png')
     expect(first('.ranked-user')).to have_content @user1.name
   end
 end
