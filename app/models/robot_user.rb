@@ -5,15 +5,17 @@ class RobotUser < User
   attr_accessor :think_time
   attr_reader :match
   after_initialize :set_defaults
-  after_create :set_name
+  after_create :set_attribute_values
 
   def set_defaults
     self.name ||= "robot"
     @think_time ||= 2.5
   end
 
-  def set_name
+  def set_attribute_values
     update_attribute(:name, "robot#{self.id}")
+    update_attribute(:email, "robot#{self.id}@rolemodelsoftware.com")
+    update_attribute(:password, "robot#{self.id}password")
   end
 
   def observe_match(match)

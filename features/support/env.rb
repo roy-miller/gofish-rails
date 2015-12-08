@@ -16,23 +16,23 @@ require 'pry'
 #ActiveRecord::Base.logger.level = 1
 
 # disables rack logging
-module Rack
- class CommonLogger
-   def call(env)
-     # do nothing
-     @app.call(env)
-   end
- end
-end
+# module Rack
+#  class CommonLogger
+#    def call(env)
+#      # do nothing
+#      @app.call(env)
+#    end
+#  end
+# end
 
 # disables poltergeist logging
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(
-    app,
-    extensions: [ 'features/support/logs.js' ],
-    js_errors:   true
-  )
-end
+# Capybara.register_driver :poltergeist do |app|
+#   Capybara::Poltergeist::Driver.new(
+#     app,
+#     extensions: [ 'features/support/logs.js' ],
+#     js_errors:   true
+#   )
+# end
 
 Capybara.javascript_driver = :poltergeist
 Spinach::FeatureSteps.include Spinach::FeatureSteps::Capybara
