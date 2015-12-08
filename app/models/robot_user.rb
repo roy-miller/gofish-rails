@@ -1,6 +1,3 @@
-require 'match'
-require 'user'
-
 class RobotUser < User
   attr_accessor :think_time
   attr_reader :match

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.real
+    @users = User.registered
   end
 
   # GET /users/1
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def show
     @wins = @user.matches.finished.wins(@user).count
     @losses = @user.matches.finished.where.not(winner: @user).count
-    ranked_users = User.real.sort_by { |user| user.matches.finished.wins(user).count }.reverse
+    ranked_users = User.registered.sort_by { |user| user.matches.finished.wins(user).count }.reverse
     @rank = ranked_users.index(@user) + 1
     @top_ten_match_winners = ranked_users.take(10)
   end

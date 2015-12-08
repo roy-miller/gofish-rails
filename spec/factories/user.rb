@@ -2,9 +2,9 @@ FactoryGirl.define do
   factory :user do
     sequence(:name) { |n| "user#{n}" }
 
+    factory :registered_user, class: RegisteredUser, parent: :user
+
     factory :robot_user, class: RobotUser, parent: :user do
-      #sequence(:name) { |n| "robot#{n}" }
-      #name 'robot'
       think_time 0
 
       trait :thinker do

@@ -2,8 +2,8 @@ class Spinach::Features::UserRankings < Spinach::FeatureSteps
   include Helpers
 
   step 'a set of completed matches' do
-    @user1 = create(:user, name: 'user1')
-    user2 = create(:user, name: 'user2')
+    @user1 = create(:registered_user, name: 'user1')
+    user2 = create(:registered_user, name: 'user2')
     create_completed_match(winner: @user1, losers: [user2])
     create_completed_match(winner: @user1, losers: [user2])
     create_completed_match(winner: user2, losers: [@user1])
