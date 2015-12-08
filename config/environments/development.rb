@@ -36,6 +36,8 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   config.logger = Logger.new(STDOUT)
   config.log_level = :DEBUG
 

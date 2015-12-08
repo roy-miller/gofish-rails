@@ -1,6 +1,8 @@
 class StartController < ApplicationController
   MyMatchMaker ||= MatchMaker.new
 
+  before_action :authenticate_user!
+
   def wait
     reset_match_maker if (params['reset_match_maker'] == 'true')
     match_maker.start_timeout_seconds = params['match_maker_timeout'].to_f if (params['match_maker_timeout'])

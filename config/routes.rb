@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :registered_users
   resources :users
   root 'welcome#index'
   post '/start', to: 'start#wait'

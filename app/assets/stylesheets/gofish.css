@@ -8,6 +8,15 @@ body { background-color: rgb(59,89,152); font-size: 100%; }
 
 .row { margin-bottom: 10px; }
 
+#login_menu {
+  text-align: right;
+}
+
+#login_menu a {
+  color: white;
+  font-variant: small-caps;
+}
+
 #funny_fish {
   width: 350px;
   height: 254px;
