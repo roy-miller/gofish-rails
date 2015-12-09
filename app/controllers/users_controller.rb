@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @wins = @user.matches.finished.wins(@user).count
     @losses = @user.matches.finished.where.not(winner: @user).count
     ranked_users = User.real.sort_by { |user| user.matches.finished.wins(user).count }.reverse
-    @rank = ranked_users.index(@user) + 1
+    @rank = (ranked_users.index(@user) + 1) if ranked_users
     @top_ten_match_winners = ranked_users.take(10)
   end
 

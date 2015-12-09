@@ -7,11 +7,11 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
 
   step 'I am logged in' do
     @user = create(:registered_user)
-    visit '/registered_users/sign_in'
+    visit '/users/sign_in'
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button "Log in"
-    expect(page).to have_content "Name: #{@user.name}"
+    #expect(page).to have_content "Name: #{@user.name}"
   end
 
   step 'I choose my game options and play' do
@@ -31,7 +31,8 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
   end
 
   step 'another player joins the game' do
-    simulate_play_request(user: create(:registered_user, name: 'user2'),
+    @another_user = create(:registered_user)
+    simulate_play_request(user: @another_user,
                           number_of_opponents: 1,
                           user_id: '')
   end
@@ -45,7 +46,6 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
   end
 
   step 'the game starts' do
-    binding.pry
     # TODO how can I get rid of "first" stuff when there's no match to grab?
     visit "/matches/#{Match.first.id}/users/#{Match.first.users.first.id}"
     expect(page.text).to have_text /welcome, user1/i
