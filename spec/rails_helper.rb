@@ -13,8 +13,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
-  # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include Devise::TestHelpers, type: :controller
 end

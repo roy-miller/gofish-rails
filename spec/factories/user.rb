@@ -8,6 +8,8 @@ FactoryGirl.define do
     end
 
     factory :robot_user, class: RobotUser, parent: :user do
+      email { "robot#{'astring'.object_id}@dummydomain.com" }
+      password { "password" }
       think_time 0
 
       trait :thinker do
@@ -19,8 +21,7 @@ FactoryGirl.define do
       end
 
       after(:create) do |robot, evaluator|
-        robot.update_column(:name, "robot#{robot.id}")
-        robot.reload
+        robot.name = "robot#{robot.id}"
         robot.save
       end
     end

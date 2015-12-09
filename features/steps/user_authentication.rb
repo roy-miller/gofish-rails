@@ -45,7 +45,21 @@ class Spinach::Features::UserAuthentication < Spinach::FeatureSteps
     expect(page).to have_content /invalid email or password/i
   end
 
-  step 'I see my user page' do
+  step 'I see my user information' do
     expect(page).to have_content "Name: #{@user_name}"
+  end
+
+  step 'an authenticated user' do
+    an_existing_user
+    i_am_on_the_welcome_page
+    i_login
+  end
+
+  step 'I logout' do
+    click_link 'logout'
+  end
+
+  step 'I am logged out' do
+    expect(page).to have_content /signed out successfully/i
   end
 end

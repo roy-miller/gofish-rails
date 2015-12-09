@@ -1,6 +1,7 @@
 module Helpers
   include Spinach::DSL
   include Rack::Test::Methods
+  include Devise::TestHelpers
 
   # see https://gist.github.com/alex-zige/5795358
   # and https://github.com/brynary/rack-test
@@ -85,7 +86,7 @@ module Helpers
   end
 
   def make_match_with_users(humans: 0, robots: 0)
-    human_users = create_list(:user, humans)
+    human_users = create_list(:registered_user, humans)
     robot_users = create_list(:robot_user, robots)
     users = human_users.concat(robot_users)
     @match = create(:match, :users_have_no_cards, users: users)

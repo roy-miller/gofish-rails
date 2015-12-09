@@ -5,6 +5,15 @@ require 'database_cleaner'
 class Spinach::Features::StartGame < Spinach::FeatureSteps
   include Helpers
 
+  step 'I am logged in' do
+    @user = create(:registered_user)
+    visit '/registered_users/sign_in'
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+    click_button "Log in"
+    expect(page).to have_content "Name: #{@user.name}"
+  end
+
   step 'I choose my game options and play' do
     ask_to_play
   end
@@ -14,7 +23,8 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
   end
 
   step 'I am waiting for a game with 2 players' do
-    simulate_play_request(user: build(:user, name: 'user1'),
+    binding.pry
+    simulate_play_request(user: @user,
                           number_of_opponents: 1,
                           user_id: '',
                           reset_match_maker: true,
@@ -22,7 +32,7 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
   end
 
   step 'another player joins the game' do
-    simulate_play_request(user: build(:user, name: 'user2'),
+    simulate_play_request(user: create(:registered_user, name: 'user2'),
                           number_of_opponents: 1,
                           user_id: '')
   end
@@ -36,6 +46,7 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
   end
 
   step 'the game starts' do
+    binding.pry
     # TODO how can I get rid of "first" stuff when there's no match to grab?
     visit "/matches/#{Match.first.id}/users/#{Match.first.users.first.id}"
     expect(page.text).to have_text /welcome, user1/i

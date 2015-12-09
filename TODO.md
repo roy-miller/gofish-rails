@@ -10,3 +10,4 @@
 [ ] add Devise
 [ ] make MatchController return JSON
 [ ] account for ties in the game
+[ ] remove extra save of RobotUser in MatchMaker

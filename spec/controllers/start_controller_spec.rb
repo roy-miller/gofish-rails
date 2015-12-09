@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe StartController, type: :controller do
   # QUESTION: use a factory, or keep it real?
-  # let!(:existing_user) { User.create(name: 'ExistingUser') }
+  # let!(:existing_user) { create(:registered_user, name: 'ExistingUser') }
   #
   # before do
   #   controller.send(:reset_match_maker)
+  #   @request.env["devise.mapping"] = Devise.mappings[:user]
+  #   sign_in existing_user
   # end
   #
   # describe "POST #wait" do

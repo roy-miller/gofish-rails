@@ -3,6 +3,9 @@ Feature: Start game
   As a potential player
   I want a game to start when there are enough players
 
+  Background:
+    Given I am logged in
+
   @javascript
   Scenario: Not enough players join a game in time
     Given I am waiting for a game with 2 players

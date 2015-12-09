@@ -8,13 +8,17 @@ body { background-color: rgb(59,89,152); font-size: 100%; }
 
 .row { margin-bottom: 10px; }
 
-#login_menu {
+#login_menu, #logout_menu {
   margin-right: 20px;
   text-align: right;
 }
 
 #login_menu a {
   color: white;
+  font-variant: small-caps;
+}
+
+#logout_menu a {
   font-variant: small-caps;
 }
 

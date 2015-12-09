@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :registered_users
   resources :users
   root 'welcome#index'
+  # root :to => 'users#show', :constraints => lambda { |request| request.env['warden'].user.class.name == 'RegisteredUser' }, :as => "registered_user_root"
+  # authenticated :registered_user { root :to => 'users#show', as: :registered_user_root }
   post '/start', to: 'start#wait'
   post '/request_card', to: 'match#make_request'
   get  '/matches/:match_id/users/:user_id', to: 'match#show'

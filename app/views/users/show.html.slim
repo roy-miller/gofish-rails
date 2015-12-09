@@ -1,3 +1,5 @@
+#logout_menu
+  = link_to "logout", destroy_user_session_path, method: :delete
 h2#user_name Name: #{@user.name}
 #wins_and_losses
   #wins Wins: #{@wins}
@@ -10,5 +12,11 @@ h2#user_name Name: #{@user.name}
       ol
         - for user in @top_ten_match_winners
           li.ranked-user = user.name
+form#game_options action="/start" method="post"
+  p#opponents_caption Number of people you want to play
+  = select_tag(:number_of_opponents, options_for_select((1..6).each { |value| value }))
+  .row
+    input#start_playing type="submit" value="Play"
+  input#user_id type="hidden" value="#{@user.id}"
 /= link_to 'Edit', edit_user_path(@user)
 /= link_to 'Back', users_path

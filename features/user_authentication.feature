@@ -7,10 +7,10 @@ Feature: User authentication
   Scenario: New user registration
     Given I try to login
     When I register as a new user
-    Then I see my user page
+    Then I see my user information
 
   @javascript
-  Scenario: Non-existing user login
+  Scenario: Non-existant user login
     Given I am on the welcome page
     When I login
     Then I see an invalid login message
@@ -20,4 +20,10 @@ Feature: User authentication
     Given an existing user
     And I am on the welcome page
     When I login
-    Then I see my user page
+    Then I see my user information
+
+  @javascript
+  Scenario: User logs out
+    Given an authenticated user
+    When I logout
+    Then I am logged out
