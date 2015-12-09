@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :registered_users
+  devise_for :users
   resources :users
   root 'welcome#index'
   # root :to => 'users#show', :constraints => lambda { |request| request.env['warden'].user.class.name == 'RegisteredUser' }, :as => "registered_user_root"

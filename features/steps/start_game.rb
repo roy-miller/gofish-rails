@@ -23,7 +23,6 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
   end
 
   step 'I am waiting for a game with 2 players' do
-    binding.pry
     simulate_play_request(user: @user,
                           number_of_opponents: 1,
                           user_id: '',
