@@ -3,11 +3,12 @@ h2#user_name Name: #{@user.name}
   #wins Wins: #{@wins}
   #losses Losses: #{@losses}
   #user_rank Rank: #{@rank}
-#rankings
-  #top_ten
-    | Top 10
-    ol
-      - for user in @top_ten_match_winners
-        li.ranked-user = user.name
+- if @top_ten_match_winners
+  #rankings
+    #top_ten
+      | Top 10
+      ol
+        - for user in @top_ten_match_winners
+          li.ranked-user = user.name
 /= link_to 'Edit', edit_user_path(@user)
 /= link_to 'Back', users_path

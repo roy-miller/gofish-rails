@@ -1,5 +1,9 @@
+require_relative './common_steps.rb'
+require_relative './helpers.rb'
+
 class Spinach::Features::UserRankings < Spinach::FeatureSteps
   include Helpers
+  include Devise::TestHelpers
 
   step 'a set of completed matches' do
     @user1 = create(:registered_user, name: 'user1')

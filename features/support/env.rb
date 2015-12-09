@@ -13,7 +13,7 @@ require 'selenium-webdriver'
 require 'pry'
 
 # disables ActiveRecord logging (set to 0 or comment to turn it back on)
-#ActiveRecord::Base.logger.level = 1
+ActiveRecord::Base.logger.level = 1
 
 # disables rack logging
 module Rack

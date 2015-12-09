@@ -95,6 +95,10 @@ module Helpers
     @match
   end
 
+  def visit_welcome_page
+    visit '/'
+  end
+
   def visit_player_page
     @match.reload
     visit "/matches/#{@match.id}/users/#{@me.id}"

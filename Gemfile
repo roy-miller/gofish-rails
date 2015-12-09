@@ -24,12 +24,12 @@ group :development, :test do
   gem 'spring',             '1.5.0'
   gem 'rspec-rails',        '3.4.0'
   gem 'spinach-rails',      '0.2.1'
+  gem 'factory_girl_rails', '4.5.0'
 end
 
 group :test do
   gem 'capybara',           '2.5.0'
   gem 'poltergeist',        '1.8.0'
   gem 'selenium-webdriver', '2.48.1'
-  gem 'factory_girl_rails', '4.5.0'
   gem 'database_cleaner',   '1.5.1'
 end
