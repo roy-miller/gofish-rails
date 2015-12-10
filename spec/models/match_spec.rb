@@ -1,5 +1,5 @@
 describe Match do
-  let(:users) { create_list(:registered_user, 2) }
+  let(:users) { create_list(:real_user, 2) }
   let(:match) { build(:match, users: users) }
 
   context 'in progress' do

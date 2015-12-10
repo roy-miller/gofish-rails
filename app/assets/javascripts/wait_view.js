@@ -20,7 +20,13 @@ $(document).ready(function() {
     var user_id = document.getElementById('player').getAttribute('data-userid');
     var waitChannel = pusher.subscribe('wait_channel_' + user_id);
     waitChannel.bind('match_start_event', function(data) {
-      waitView.start(data['message']).bind(waitView);
+      try {
+        waitView.start(data['message']);
+      }
+      catch (exception) {
+        console.log("exception starting waitView with " + data['message'] + ":");
+        console.dir(exception);
+      }
     });
   }
 });

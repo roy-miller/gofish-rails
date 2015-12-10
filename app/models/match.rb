@@ -1,9 +1,5 @@
 class Match < ActiveRecord::Base
   has_and_belongs_to_many :users, -> { order('matches_users.id ASC') }
-  #has_many :participations
-  #has_many :users, through: :participations
-  #has_one :winner, -> { where(id: self.winner_id) }, class_name: 'User'
-  #has_one :winner, class_name: 'User', foreign_key: 'id'
   belongs_to :winner, class_name: 'User', foreign_key: 'winner_id'
   serialize :game
   serialize :observers

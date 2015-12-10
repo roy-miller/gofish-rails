@@ -2,14 +2,13 @@ FactoryGirl.define do
   factory :user do
     sequence(:name) { |n| "user#{n}" }
 
-    factory :registered_user, class: RegisteredUser, parent: :user do
+    factory :real_user, class: RealUser, parent: :user do
       email { "#{name}@example.com" }
       password { "password" }
     end
 
     factory :robot_user, class: RobotUser, parent: :user do
       email { "robot#{'astring'.object_id}@dummydomain.com" }
-      password { "password" }
       think_time 0
 
       trait :thinker do

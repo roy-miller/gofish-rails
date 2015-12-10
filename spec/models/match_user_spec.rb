@@ -1,5 +1,5 @@
 describe MatchUser do
-  let(:user) { build(:user) }
+  let(:user) { build(:real_user) }
   let(:player) { build(:player) }
   let(:match_user) { MatchUser.new(user: user, player: player) }
 

@@ -30,10 +30,10 @@ html
             - @perspective.opponents.each_with_index do |opponent, index|
               .opponent.group data-opponent-number="#{index}"
                 p.opponent-hand-caption
-                    a.opponent-name data-opponent-id="#{opponent[:id]}"
-                      strong> #{opponent[:name]} ->
-                      <span id="opponent_#{index}_hand_card_count">#{opponent[:card_count]}</span> cards,
-                      <span id="opponent_#{index}_hand_book_count">#{opponent[:book_count]}</span> books
+                  a.opponent-name data-opponent-id="#{opponent[:id]}"
+                    strong> #{opponent[:name]} ->
+                    <span id="opponent_#{index}_hand_card_count">#{opponent[:card_count]}</span> cards,
+                    <span id="opponent_#{index}_hand_book_count">#{opponent[:book_count]}</span> books
                 .opponent-hand-cards
                   - opponent[:card_count].times
                     .opponent-card

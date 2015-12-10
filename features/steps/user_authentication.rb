@@ -8,9 +8,9 @@ class Spinach::Features::UserAuthentication < Spinach::FeatureSteps
     @user_name = 'existinguser'
     @user_email = 'existinguser@example.com'
     @user_password = 'password'
-    create(:registered_user, name: @user_name,
-                             email: @user_email,
-                             password: @user_password)
+    create(:real_user, name: @user_name,
+                       email: @user_email,
+                       password: @user_password)
   end
 
   step 'I try to login' do
