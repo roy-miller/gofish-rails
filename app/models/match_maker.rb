@@ -50,8 +50,9 @@ class MatchMaker
   def add_robots(number_of_players)
     a_match = nil
     until a_match do
-      unique_email_address_for_devise = "robot#{"astring".object_id}@dummydomain.com"
-      robot = RobotUser.create(email: unique_email_address_for_devise)
+      #unique_email_address_for_devise = "robot#{"astring".object_id}@dummydomain.com"
+      #robot = RobotUser.create(email: unique_email_address_for_devise)
+      robot = RobotUser.create
       robot.save!
       a_match = match(robot, number_of_players)
       robot.observe_match(a_match)

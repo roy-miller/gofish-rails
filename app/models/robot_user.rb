@@ -1,12 +1,20 @@
+require 'securerandom'
+
 class RobotUser < User
   attr_accessor :think_time
   attr_reader :match
   after_initialize :set_defaults
+  before_create :set_email
   after_create :set_name
 
   def set_defaults
     self.name ||= "robot"
     @think_time ||= 2.5
+  end
+
+  def set_email
+    unique_email_address_for_devise = "robot#{SecureRandom.uuid}@dummydomain.com"
+    self.email = unique_email_address_for_devise
   end
 
   def set_name
