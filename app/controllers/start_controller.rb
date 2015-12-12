@@ -7,9 +7,8 @@ class StartController < ApplicationController
     match_maker.start_timeout_seconds = params['match_maker_timeout'].to_f if (params['match_maker_timeout'])
     @number_of_players = params['number_of_opponents'].to_i + 1
     if match = match_maker.match(current_user, @number_of_players)
-      Rails.logger.debug "\n\n\n***** NOW PUSH ... #{match.id} and #{user.id} to 'wait_channel_#{user.id}'"
       match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "/matches/#{match.id}/users/#{user.id}" }) }
-      redirect_to "/matches/#{match.id}/users/#{user.id}", status: :found
+      redirect_to "/matches/#{match.id}/users/#{current_user.id}", status: :found
     else
       @user = current_user
       render :template => 'start/wait'

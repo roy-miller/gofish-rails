@@ -3,25 +3,30 @@ Feature: Start game
   As a potential player
   I want a game to start when there are enough players
 
-  Background:
-    Given I am logged in
-
   @javascript
   Scenario: Not enough players join a game in time
-    Given I am waiting for a game with 2 players
+    Given I am logged in
+    And I am waiting for a game with 2 players
     When no other player joins in time
     Then the game starts
     And I am playing one robot
 
   @javascript
   Scenario: Enough players
-    Given I am waiting for a game with 2 players
+    Given two authenticated users
+    And I am waiting for a game with 2 players
     When another player joins the game
     Then the game starts
     And I am playing one opponent
 
   @javascript
   Scenario: Player joins with wrong number of opponents
-    Given I am waiting for a game with 2 players
-    When a player joins with the wrong number of opponents
-    Then the match tells me to wait for opponents
+    Given I am logged in
+    And I am waiting for a game with 2 players
+    When another player joins with the wrong number of opponents
+    Then the game starts
+    And I am playing one robot
+
+  #@javascript
+  #Scenario: Check
+  #  Given check this

@@ -5,13 +5,10 @@ class MatchMaker
   attr_accessor :start_timeout_seconds, :pending_users
 
   def initialize
-    @start_timeout_seconds = 5
+    @start_timeout_seconds = 6
   end
 
   def match(user, number_of_players)
-    Rails.logger.info "\n\n\n***** ASKED FOR MATCH: players: #{number_of_players}  user: #{user.name}"
-    Rails.logger.info "***** PENDING USERS: #{pending_users[number_of_players]}"
-    Rails.logger.info "***** TIME NOW: #{Time.now}\n\n\n"
     relevant_pending_users = pending_users[number_of_players]
     trigger_start_timer(number_of_players) if relevant_pending_users.empty?
     relevant_pending_users << user
@@ -45,7 +42,6 @@ class MatchMaker
           end
         }
       rescue Timeout::Error => e
-        Rails.logger.info "\n\n\n***** TIMER TRIPPED in seconds: #{timeout_seconds}\n\n\n"
         add_robots(number_of_players)
       end
     }

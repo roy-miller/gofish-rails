@@ -31,12 +31,13 @@ PlayerView.prototype.listenForCardRequests = function() {
     element.onclick = function() {
       var opponentId = this.getAttribute('data-opponent-id');
       var selectedCardRank = self.getSelectedCardRank();
-      if (document.getElementById('selected_card_rank').value) {
+      if (selectedCardRank) {
         $.post('/request_card', {
           match_id: self.matchId,
           requestor_id: self.playerId,
           requested_id: opponentId,
-          rank: selectedCardRank
+          rank: selectedCardRank,
+          authenticity_token: $('meta[name=csrf-token]').attr('content')
         });
       }
     };
