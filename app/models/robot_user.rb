@@ -13,7 +13,7 @@ class RobotUser < User
   end
 
   def set_email
-    unique_email_address_for_devise = "robot#{SecureRandom.uuid}@dummydomain.com"
+    unique_email_address_for_devise = "robot#{SecureRandom.uuid}@gofish.com"
     self.email = unique_email_address_for_devise
   end
 

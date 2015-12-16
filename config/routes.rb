@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   devise_for :users, class_name: 'RealUser'
   resources :users
   root 'welcome#index'
-  post '/start', to: 'start#wait'
-  post '/request_card', to: 'match#make_request'
-  get  '/matches/:match_id/users/:user_id', to: 'match#show'
+  #match '/simulate_start', to: 'start#simulate_start', via: [:get, :post]
+  post '/simulate_start', to: 'start#simulate_start'
+  get '/simulate_start', to: 'start#simulate_start'
+  post '/start', to: 'matches#new'
+  post '/request_card', to: 'matches#edit'
+  get  '/matches/:match_id/users/:user_id', to: 'matches#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

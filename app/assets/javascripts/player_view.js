@@ -87,8 +87,8 @@ PlayerView.prototype.updateMatch = function(matchPerspective) {
 }
 
 PlayerView.prototype.updatePlayerInfo = function() {
-  document.getElementById('your_hand_card_count').textContent = this.matchPerspective.cards.length;
-  document.getElementById('your_hand_book_count').textContent = this.matchPerspective.book_count;
+  document.getElementById('your_hand_card_count').textContent = this.matchPerspective.player.cards.length;
+  document.getElementById('your_hand_book_count').textContent = this.matchPerspective.player.book_count;
 }
 
 PlayerView.prototype.playerHandElement = function() {
@@ -98,7 +98,7 @@ PlayerView.prototype.playerHandElement = function() {
 PlayerView.prototype.updatePlayerCards = function() {
   var self = this;
   this.playerHandElement().innerHTML = '';
-  this.matchPerspective.cards.forEach(function (card) {
+  this.matchPerspective.player.cards.forEach(function (card) {
     var card_element = document.createElement('a');
     card_element.className = 'your-card';
     card_element.setAttribute('data-rank', card.rank);

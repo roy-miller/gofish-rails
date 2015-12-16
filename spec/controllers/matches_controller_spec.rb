@@ -1,35 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe StartController, type: :controller do
-  # QUESTION: use a factory, or keep it real?
-  # let!(:existing_user) { create(:registered_user, name: 'ExistingUser') }
+RSpec.describe MatchesController, type: :controller do
+  # let!(:existing_user) { create(:real_user, name: 'ExistingUser') }
+  # let!(:waiting_user) { create(:real_user, name: 'WaitingUser') }
   #
   # before do
   #   controller.send(:reset_match_maker)
-  #   @request.env["devise.mapping"] = Devise.mappings[:user]
   #   sign_in existing_user
   # end
   #
   # describe "POST #wait" do
-  #   it 'creates new user if user does not exist' do
-  #     expect {
-  #       post :wait, { number_of_opponents: 1, user_name: 'NewUser' }
-  #     }.to change(User, :count).by(1)
-  #     # expect(User).to receive(:find_or_create_by).with(name: 'NewUser').exactly(1).times
-  #   end
-  #
-  #   it 'finds existing user' do
-  #     expect {
-  #       post :wait, { number_of_opponents: 1, user_name: 'ExistingUser' }
-  #     }.not_to change(User, :count)
-  #   end
-  #
   #   it 'sets number of players for view' do
   #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
   #     expect(assigns(:number_of_players)).to eq 2
   #   end
   #
-  #   it 'sets user for view when user waiting for match' do
+  #   it 'sets user for view' do
   #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
   #     expect(assigns(:user)).to eq existing_user
   #   end
@@ -37,6 +23,32 @@ RSpec.describe StartController, type: :controller do
   #   it 'renders wait view if no match started' do
   #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
   #     expect(response).to render_template('start/wait')
+  #   end
+  #
+  #   it 'redirects to match view if match started' do
+  #     controller.send(:match_maker_timeout=, 10)
+  #     controller.send(:match_maker).pending_users[2] = [waiting_user]
+  #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
+  #     #expect(response).to redirect_to("/matches/#{match.id}/users/#{existing_user.id}")
+  #     expect(response.location).to match(/matches\/\d+\/users\/#{existing_user.id}/)
+  #     expect(controller.current_user).to eq existing_user
+  #   end
+  #
+  #   context 'json' do
+  #     it 'returns json to waiting user if requested format is json' do
+  #       post :wait, {number_of_opponents: 1, user_name: 'ExistingUser', format: :json}
+  #       parsed_body = JSON.parse(response.body)
+  #       expect(response). to have_http_status(200)
+  #       expect(parsed_body['message']).to match(/waiting for 2 players/i)
+  #     end
+  #   end
+  # end
+  #
+  # describe "POST #simulate_start" do
+  #   it 'returns json for user' do
+  #     post :simulate_start, {format: :json}
+  #     parsed_body = JSON.parse(response.body)
+  #     expect(parsed_body['status']).to match(/started/i)
   #   end
   # end
 end
