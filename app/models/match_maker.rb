@@ -26,10 +26,10 @@ class MatchMaker
   end
 
   def start_match_with(users)
-    match = Match.create(users: users) # TODO need match.id (save #1)
+    match = Match.create(users: users)
     match.start
     MatchClientNotifier.new.observe_match(match)
-    match.save! # TODO AND have to save observers for robot match (save #2)
+    match.save!
     match
   end
 
@@ -38,7 +38,6 @@ class MatchMaker
       begin
         Timeout::timeout(timeout_seconds) {
           until enough_users_for(number_of_players)
-            # better way to wait?
           end
         }
       rescue Timeout::Error => e
@@ -50,14 +49,13 @@ class MatchMaker
   def add_robots(number_of_players)
     a_match = nil
     until a_match do
-      #unique_email_address_for_devise = "robot#{"astring".object_id}@dummydomain.com"
-      #robot = RobotUser.create(email: unique_email_address_for_devise)
       robot = RobotUser.create
-      robot.save!
+      robot.save! # TODO save! necessary only for callback?
       a_match = match(robot, number_of_players)
       robot.observe_match(a_match)
       a_match.save!
     end
-    a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "/matches/#{a_match.id}/users/#{user.id}" }) }
+    #a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "/matches/#{a_match.id}/users/#{user.id}" }) }
+    a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { match_id: "#{a_match.id}" }) }
   end
 end

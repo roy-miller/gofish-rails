@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title GoFish
+    link rel="stylesheet" type="text/css" href="/assets/gofish.css"
+    script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"
+    script src="https://js.pusher.com/3.0/pusher.min.js" type="text/javascript"
+  body
+    #login_menu
+      = link_to "login", new_user_session_path
+    #welcome.group
+      #funny_fish
+        img src="/assets/funny_fish.png"
+      h1#welcome_header Welcome, to GoFish!
+      form#game_options action="/start" method="post"
+        .row
+          input#user_name name="user_name" type="text" placeholder="Enter username"
+        .row
+          input#user_id name="user_id" type="text" placeholder="Enter user id if you have one"
+        .row
+          p#opponents_caption Number of people you want to play
+          = select_tag(:number_of_opponents, options_for_select((1..6).each { |value| value }))
+        .row
+          input#start_playing type="submit" value="Play for FREE"
+        = hidden_field_tag :authenticity_token, form_authenticity_token

@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
+
   devise_for :users, class_name: 'RealUser'
   resources :users
-  root 'welcome#index'
-  #match '/simulate_start', to: 'start#simulate_start', via: [:get, :post]
+
+  post '/api/authenticate' => 'api#authenticate'
+  post '/api/create' => 'api#create'
+  patch '/api/matches/:id' => 'api#update'
+  get '/api/matches/:id' => 'api#show'
+
   post '/simulate_start', to: 'start#simulate_start'
   get '/simulate_start', to: 'start#simulate_start'
-  post '/start', to: 'matches#new'
-  post '/request_card', to: 'matches#edit'
+  post '/start', to: 'matches#create'
+  post '/request_card', to: 'matches#update'
   get  '/matches/:match_id/users/:user_id', to: 'matches#show'
 
   # The priority is based upon order of creation: first created -> highest priority.

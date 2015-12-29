@@ -1,4 +1,5 @@
 var WaitView = function WaitView(logging) {
+  this.userId = null;
   if(logging) {
     Pusher.log = function(message) {
      if (window.console && window.console.log) {
@@ -8,8 +9,8 @@ var WaitView = function WaitView(logging) {
   }
 }
 
-WaitView.prototype.start = function(url) {
-  window.location = url;
+WaitView.prototype.start = function(matchId) {
+  window.location = "/matches/" + matchId + "/users/" + this.userId;
 }
 
 $(document).ready(function() {
@@ -17,14 +18,15 @@ $(document).ready(function() {
 
   if(document.getElementById('player')) {
     var pusher = new Pusher('9d7c66d1199c3c0e7ca3', { encrypted: true });
-    var user_id = document.getElementById('player').getAttribute('data-userid');
-    var waitChannel = pusher.subscribe('wait_channel_' + user_id);
+    var userId = document.getElementById('player').getAttribute('data-userid');
+    waitView.userId = userId;
+    var waitChannel = pusher.subscribe('wait_channel_' + userId);
     waitChannel.bind('match_start_event', function(data) {
       try {
-        waitView.start(data['message']);
+        waitView.start(data['match_id']);
       }
       catch (exception) {
-        console.log("exception starting waitView with " + data['message'] + ":");
+        console.log("exception starting waitView with " + data['match_id'] + ":");
         console.dir(exception);
       }
     });

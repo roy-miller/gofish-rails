@@ -10,5 +10,11 @@ FactoryGirl.define do
         match.users.each { |user| match.player_for(user).hand = [] }
       end
     end
+
+    trait :users_have_cards_with_same_rank do
+      after(:create) do |match|
+        match.users.each { |user| match.player_for(user).hand = [build(:card, rank: 'A')] }
+      end
+    end
   end
 end

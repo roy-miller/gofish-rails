@@ -34,13 +34,12 @@ class MatchPerspective
     hash[:messages] = @messages
     hash[:deck_card_count] = @deck_card_count
     hash[:player] = {
+      id: @user.id,
       name: @user.name,
       book_count: @player.book_count,
+      card_count: @player.card_count,
       cards: @player.hand.map { |card| { rank: card.rank, suit: card.suit } }
     }
-    # hash[:name] = @user.name
-    # hash[:book_count] = @player.book_count
-    # hash[:cards] = @player.hand.map { |card| { rank: card.rank, suit: card.suit } }
     hash[:opponents] = @opponents
     hash
   end

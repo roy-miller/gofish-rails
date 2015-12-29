@@ -9,34 +9,35 @@ RSpec.describe MatchesController, type: :controller do
   #   sign_in existing_user
   # end
   #
-  # describe "POST #wait" do
+  # describe "POST #new" do
   #   it 'sets number of players for view' do
-  #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
+  #     post :new, {number_of_opponents: 1, user_name: 'ExistingUser'}
   #     expect(assigns(:number_of_players)).to eq 2
   #   end
   #
   #   it 'sets user for view' do
-  #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
+  #     post :new, {number_of_opponents: 1, user_name: 'ExistingUser'}
   #     expect(assigns(:user)).to eq existing_user
   #   end
   #
   #   it 'renders wait view if no match started' do
-  #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
+  #     post :new, {number_of_opponents: 1, user_name: 'ExistingUser'}
   #     expect(response).to render_template('start/wait')
   #   end
   #
-  #   it 'redirects to match view if match started' do
-  #     controller.send(:match_maker_timeout=, 10)
-  #     controller.send(:match_maker).pending_users[2] = [waiting_user]
-  #     post :wait, {number_of_opponents: 1, user_name: 'ExistingUser'}
-  #     #expect(response).to redirect_to("/matches/#{match.id}/users/#{existing_user.id}")
-  #     expect(response.location).to match(/matches\/\d+\/users\/#{existing_user.id}/)
-  #     expect(controller.current_user).to eq existing_user
-  #   end
+  #   # TODO why do I get a circular ref error for Game?
+  #   # it 'redirects to match view if match started' do
+  #   #   controller.send(:match_maker_timeout=, 0.25)
+  #   #   controller.send(:match_maker).pending_users[2] = [waiting_user]
+  #   #   post :new, {number_of_opponents: 1, user_name: 'ExistingUser'}
+  #   #   #expect(response).to redirect_to("/matches/#{match.id}/users/#{existing_user.id}")
+  #   #   expect(response.location).to match(/matches\/\d+\/users\/#{existing_user.id}/)
+  #   #   expect(controller.current_user).to eq existing_user
+  #   # end
   #
   #   context 'json' do
   #     it 'returns json to waiting user if requested format is json' do
-  #       post :wait, {number_of_opponents: 1, user_name: 'ExistingUser', format: :json}
+  #       post :new, {number_of_opponents: 1, user_name: 'ExistingUser', format: :json}
   #       parsed_body = JSON.parse(response.body)
   #       expect(response). to have_http_status(200)
   #       expect(parsed_body['message']).to match(/waiting for 2 players/i)
@@ -44,13 +45,20 @@ RSpec.describe MatchesController, type: :controller do
   #   end
   # end
   #
-  # describe "POST #simulate_start" do
-  #   it 'returns json for user' do
-  #     post :simulate_start, {format: :json}
-  #     parsed_body = JSON.parse(response.body)
-  #     expect(parsed_body['status']).to match(/started/i)
-  #   end
-  # end
+  # # describe "POST #update" do
+  # #   it 'updates player hands correctly after a player asks for cards' do
+  # #     post :update, {match_id: 1, requestor_id: 1, requested_id: 1, card_rank: 'K'}
+  # #
+  # #   end
+  # # end
+  #
+  # # describe "POST #simulate_start" do
+  # #   it 'returns json for user' do
+  # #     post :simulate_start, {format: :json}
+  # #     parsed_body = JSON.parse(response.body)
+  # #     expect(parsed_body['status']).to match(/started/i)
+  # #   end
+  # # end
 end
 
 # RSpec.describe UsersController, type: :controller do
