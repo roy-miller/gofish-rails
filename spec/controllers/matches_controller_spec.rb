@@ -9,6 +9,15 @@ RSpec.describe MatchesController, type: :controller do
   #   sign_in existing_user
   # end
   #
+  # it 'gets perspective for user' do
+  #   expect(:get => "/matches/1/users/2").to route_to(
+  #     :controller => "matches",
+  #     :action => "show",
+  #     :match_id => "1",
+  #     :user_id => "2"
+  #   )
+  # end
+  #
   # describe "POST #new" do
   #   it 'sets number of players for view' do
   #     post :new, {number_of_opponents: 1, user_name: 'ExistingUser'}

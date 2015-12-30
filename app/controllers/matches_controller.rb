@@ -16,10 +16,12 @@ class MatchesController < ApplicationController
     @number_of_players = params['number_of_opponents'].to_i + 1
     @user = current_user
     if match = match_maker.match(current_user, @number_of_players)
-      match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "/matches/#{match.id}/users/#{user.id}" }) }
+      match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { match_id: match.id }) }
+      #match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "/matches/#{match.id}/users/#{user.id}" }) }
       respond_to do |format|
         format.json { render :json => { message: "refresh" } }
         format.html { redirect_to "/matches/#{match.id}/users/#{current_user.id}", status: :found }
+        #format.html { render json: { match_id: match.id } }
       end
     else
       respond_to do |format|
@@ -32,9 +34,9 @@ class MatchesController < ApplicationController
   # PATCH/PUT /matches/1
   # PATCH/PUT /matches/1.json
   def update
-    match = Match.find(params['match_id'].to_i)
-    requestor = match.user_for_id(params['requestor_id'].to_i)
-    recipient = match.user_for_id(params['requested_id'].to_i)
+    match = Match.find(params[:match_id].to_i)
+    requestor = match.user_for_id(params[:requestor_id].to_i)
+    recipient = match.user_for_id(params[:requested_id].to_i)
     match.ask_for_cards(requestor: requestor, recipient: recipient, card_rank: params['rank'].upcase)
     match.save!
     render json: nil, status: :ok
@@ -43,8 +45,8 @@ class MatchesController < ApplicationController
   # GET /matches/1
   # GET /matches/1.json
   def show
-    match = Match.find(params['match_id'].to_i)
-    user = match.user_for_id(params['user_id'].to_i)
+    match = Match.find(params[:match_id].to_i)
+    user = match.user_for_id(params[:user_id].to_i)
     state_for_user = match.state_for(user)
     respond_to do |format|
       format.json { render :json => state_for_user.to_json }

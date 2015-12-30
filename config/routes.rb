@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   patch '/api/matches/:id' => 'api#update'
   get '/api/matches/:id' => 'api#show'
 
-  post '/simulate_start', to: 'start#simulate_start'
-  get '/simulate_start', to: 'start#simulate_start'
+  #post '/simulate_start', to: 'start#simulate_start'
+  #get '/simulate_start', to: 'start#simulate_start'
   post '/start', to: 'matches#create'
   post '/request_card', to: 'matches#update'
   get  '/matches/:match_id/users/:user_id', to: 'matches#show'
