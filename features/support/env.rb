@@ -54,6 +54,7 @@ end
 
 Spinach.hooks.after_scenario do |scenario|
   DatabaseCleaner.clean
+  Warden.test_reset! # required per https://github.com/hassox/warden/wiki/testing
 end
 
 #DatabaseCleaner.strategy = :deletion

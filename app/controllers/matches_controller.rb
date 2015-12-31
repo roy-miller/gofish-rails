@@ -34,6 +34,7 @@ class MatchesController < ApplicationController
   # PATCH/PUT /matches/1
   # PATCH/PUT /matches/1.json
   def update
+    Rails.logger.debug "GOT TO matches -> update"
     match = Match.find(params[:match_id].to_i)
     requestor = match.user_for_id(params[:requestor_id].to_i)
     recipient = match.user_for_id(params[:requested_id].to_i)

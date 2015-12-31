@@ -14,6 +14,7 @@ gem 'pusher',               '0.15.1'
 gem 'rake',                 '10.4.2'
 gem 'pg',                   '0.18.4'
 gem 'devise',               '3.5.2'
+gem 'warden',               '1.2.3'
 
 group :development, :test do
   gem 'sqlite3',            '1.3.11'

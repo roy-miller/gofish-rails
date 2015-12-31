@@ -5,7 +5,7 @@ require 'database_cleaner'
 class Spinach::Features::StartGame < Spinach::FeatureSteps
   include Helpers
 
-  step 'I am logged in' do
+  step 'I am authenticated' do
     @user = create(:real_user)
     in_browser("#{@user.name}_session") do
       visit '/users/sign_in'

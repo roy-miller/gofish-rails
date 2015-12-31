@@ -2,6 +2,7 @@ module Helpers
   include Spinach::DSL
   include Rack::Test::Methods
   include Devise::TestHelpers
+  include Warden::Test::Helpers
 
   # see https://gist.github.com/alex-zige/5795358
   # and https://github.com/brynary/rack-test
@@ -23,6 +24,12 @@ module Helpers
       fill_in 'user_id', with: user_id
       select opponent_count, from: 'number_of_opponents'
       click_button 'start_playing'
+    end
+  end
+
+  def login_as_user(user)
+    Warden.on_next_request do |proxy|
+      proxy.set_user(user, :scope => :user)
     end
   end
 

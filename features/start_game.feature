@@ -5,7 +5,7 @@ Feature: Start game
 
   @javascript
   Scenario: Not enough players join a game in time
-    Given I am logged in
+    Given I am authenticated
     And I am waiting for a game with 2 players
     When no other player joins in time
     Then the game starts
@@ -21,7 +21,7 @@ Feature: Start game
 
   @javascript
   Scenario: Player joins with wrong number of opponents
-    Given I am logged in
+    Given I am authenticated
     And I am waiting for a game with 2 players
     When another player joins with the wrong number of opponents
     Then the game starts

@@ -7,6 +7,7 @@ Feature: End game
     Given a game with three players
     And a deck with one card left
     And I have a book
+    And I am logged in
 
   @javascript
   Scenario: I go fish, deck runs out of cards, game ends

@@ -1,8 +1,25 @@
+require_relative './helpers.rb'
+
 module CommonSteps
+  include Helpers
   include Spinach::DSL
+  include Warden::Test::Helpers
+  Warden.test_mode!
 
   step 'a game with three players' do
     start_game_with_three_players
+  end
+
+  step 'I am logged in' do
+    visit '/users/sign_in'
+    fill_in 'Email', with: @me.email
+    fill_in 'Password', with: @me.password
+    click_button "Log in"
+  end
+
+  step 'my first opponent is authenticated' do
+    # use Warden login for opponent auth to avoid mucking with browsers
+    login_as(@first_opponent, :scope => :user, :run_callbacks => false)
   end
 
   step 'it is my turn' do
@@ -66,6 +83,7 @@ module CommonSteps
     @match.player_for(@first_opponent).hand << @card_nobody_has
     @match.save!
     @first_opponent_hand_before_asking = Array.new(@match.player_for(@first_opponent).hand)
+    login_as_user @first_opponent
     simulate_card_request(match: @match,
                           requestor: @first_opponent,
                           requested: @me,
@@ -76,6 +94,7 @@ module CommonSteps
     set_my_hand_before_asking
     @match.save!
     @card_opponent_asks_for = @my_hand_before_asking.last
+    login_as_user @first_opponent
     simulate_card_request(match: @match,
                           requestor: @first_opponent,
                           requested: @me,
@@ -102,6 +121,7 @@ module CommonSteps
     give_king(@first_opponent)
     give_king(@second_opponent)
     @match.save!
+    login_as_user @first_opponent
     simulate_card_request(match: @match,
                           requestor: @first_opponent,
                           requested: @second_opponent,
@@ -126,6 +146,7 @@ module CommonSteps
   step 'my first opponent asks my second opponent for cards he does not have' do
     give_card(user: @first_opponent, rank: '7')
     @match.save!
+    login_as_user @first_opponent
     simulate_card_request(match: @match,
                           requestor: @first_opponent,
                           requested: @second_opponent,
