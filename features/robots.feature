@@ -6,6 +6,7 @@ Feature: Robots
   @javascript
   Scenario: I ask my first robot opponent for cards he has
     Given a game with one real player and one robot
+    And I am logged in
     And it is my turn
     When I ask my first opponent for cards he has
     Then I get the cards
@@ -14,6 +15,7 @@ Feature: Robots
   @javascript
   Scenario: I ask my first robot opponent for cards he does not have
     Given a game with one real player and one robot
+    And I am logged in
     And the robot thinks slowly
     And it is my turn
     And I have a card my first opponent does not
@@ -24,6 +26,7 @@ Feature: Robots
   @javascript
   Scenario: Robot opponent plays on his own
     Given a game with one real player and one robot
+    And I am logged in
     When the match tells the robot to play
     Then my first opponent asks me for cards
 

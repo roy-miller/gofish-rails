@@ -5,6 +5,7 @@ Feature: Play game
 
   Background:
     Given a game with three players
+    And I am logged in
 
   @javascript
   Scenario: I ask my first opponent for cards he has
