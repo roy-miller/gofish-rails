@@ -45,6 +45,7 @@ class Spinach::Features::Robots < Spinach::FeatureSteps
   end
 
   step 'the match tells me my first opponent asked second opponent for cards' do
+    login_as_user(@me)
     visit_player_page
     expect(page).to have_content("#{@first_opponent.name} asked #{@second_opponent.name}")
   end

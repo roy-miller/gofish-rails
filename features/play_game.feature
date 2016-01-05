@@ -57,7 +57,7 @@ Feature: Play game
   @javascript
   Scenario: Opponent asks another opponent for cards second opponent has
     Given it is my first opponent's turn
-    When my first opponent asks my second opponent for cards he has
+    When my first real opponent asks my second real opponent for cards he has
     Then the match tells me that someone asked
     And the match does not tell me that someone went fishing
     And it is still my first opponent's turn

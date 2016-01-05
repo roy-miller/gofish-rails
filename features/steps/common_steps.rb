@@ -117,15 +117,33 @@ module CommonSteps
     expect(page.has_content?("It's #{@second_opponent.name}'s turn")).to be true
   end
 
-  step 'my first opponent asks my second opponent for cards he has' do
+  step 'my first robot opponent asks my second robot opponent for cards he has' do
     give_king(@first_opponent)
     give_king(@second_opponent)
+    @match.save!
+    # this is ugly, but I see no other way to simulate 2 other players interacting,
+    # given that auth is forced on robots if they try to use MatchesController
+    opponent = lambda { @second_opponent }
+    first_opponent_metaclass = class << @first_opponent; self; end
+    first_opponent_metaclass.send(:define_method, :pick_opponent) do
+      return opponent.call()
+    end
+    def @first_opponent.pick_rank
+      "K"
+    end
+    @first_opponent.make_request(@match)
+  end
+
+  step 'my first real opponent asks my second real opponent for cards he has' do
+    give_king(@first_opponent)
+    @card_opponent_asks_for = give_king(@second_opponent)
     @match.save!
     login_as_user @first_opponent
     simulate_card_request(match: @match,
                           requestor: @first_opponent,
                           requested: @second_opponent,
-                          rank: @match.player_for(@first_opponent).hand.last.rank)
+                          rank: @card_opponent_asks_for.rank)
+    #@first_opponent.make_request(@match)
   end
 
   step 'the match tells me that someone asked' do

@@ -102,8 +102,8 @@ RSpec.describe ApiController, type: :controller do
       allow(Pusher).to receive(:trigger).and_return(nil)
       post :create, {number_of_opponents: 1}
       expect(response).to have_http_status(200)
-      expect(Pusher).to have_received(:trigger).once.with("wait_channel_#{waiting_user.id}", 'match_start_event', {:message=>"1"})
-      expect(Pusher).to have_received(:trigger).once.with("wait_channel_#{user.id}", 'match_start_event', {:message=>"1"})
+      expect(Pusher).to have_received(:trigger).once.with("wait_channel_#{waiting_user.id}", 'match_start_event', {:match_id => "1"})
+      expect(Pusher).to have_received(:trigger).once.with("wait_channel_#{user.id}", 'match_start_event', {:match_id => "1"})
     end
   end
 

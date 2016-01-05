@@ -23,14 +23,6 @@ class ApiController < ApplicationController
   def new
   end
 
-  def test
-    #render json: nil, status: :ok
-    #head :ok
-    #head :no_content
-    #render json: {}
-    render json: true
-  end
-
   def create
     reset_match_maker if (params['reset_match_maker'] == 'true')
     match_maker.start_timeout_seconds = params['match_maker_timeout'].to_f if (params['match_maker_timeout'])
@@ -63,7 +55,7 @@ class ApiController < ApplicationController
   end
 
   def push_to_waiters(match)
-    match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "#{match.id}" }) }
+    match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { match_id: "#{match.id}" }) }
   end
 
   def match_maker_timeout=(value)

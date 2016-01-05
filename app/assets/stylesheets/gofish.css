@@ -177,15 +177,17 @@ body { background-color: rgb(59,89,152); font-size: 100%; }
   width: 41px;
 }
 .opponent-name,
-.opponent-name:hover,
-.opponent-name:visited {
+.opponent-name:visited,
+.opponent-name:hover {
   margin-bottom: 10px;
   text-decoration: none;
   border-bottom: 1px rgb(59,89,152) dotted;
   color: rgb(6,69,173);
 }
 .opponent-name:hover {
-  border-bottom: 1px rgb(59,89,152) solid;
+  color: white;
+  border-bottom: 1px white solid;
+  background-color: transparent;
 }
 #opponent_0_books,
 #opponent_1_books,
