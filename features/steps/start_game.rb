@@ -40,6 +40,12 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
     end
   end
 
+  step 'I am waiting for a game with 3 players' do
+    in_browser("#{@user.name}_session") do
+      ask_to_play(opponent_count: 2, player_name: @user.name)
+    end
+  end
+
   step 'another player joins the game' do
     in_browser("#{@another_user.name}_session") do
       page.within("#game_options") do
@@ -82,6 +88,16 @@ class Spinach::Features::StartGame < Spinach::FeatureSteps
     in_browser("#{@user.name}_session") do
       expect(find_all('.opponent').length).to eq 1
       expect(find('.opponent').text).to match /robot\d+/i
+    end
+  end
+
+  step 'I am playing two robots' do
+    in_browser("#{@user.name}_session") do
+      all_opponents = find_all('.opponent')
+      expect(all_opponents.length).to eq 2
+      all_opponents.each do |opponent|
+        expect(opponent.text).to match /robot\d+/i
+      end
     end
   end
 

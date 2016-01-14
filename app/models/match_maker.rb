@@ -60,17 +60,5 @@ class MatchMaker
     a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}",
                                                'match_start_event',
                                                { match_id: "#{a_match.id}" }) }
-
-    # TODO the code above works, but it's messy; code below NEVER worked
-    # a_match = nil
-    # until a_match do
-    #   robot = RobotUser.create
-    #   robot.save!
-    #   a_match = match(robot, number_of_players)
-    #   robot.observe_match(a_match)
-    #   a_match.save!
-    # end
-    #a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "/matches/#{a_match.id}/users/#{user.id}" }) }
-    # a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { match_id: "#{a_match.id}" }) }
   end
 end

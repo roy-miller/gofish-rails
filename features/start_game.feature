@@ -12,6 +12,14 @@ Feature: Start game
     And I am playing one robot
 
   @javascript
+  Scenario: Starts with multiple robots
+    Given I am authenticated
+    And I am waiting for a game with 3 players
+    When no other player joins in time
+    Then the game starts
+    And I am playing two robots
+
+  @javascript
   Scenario: Enough players
     Given two authenticated users
     And I am waiting for a game with 2 players
