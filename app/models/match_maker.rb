@@ -47,15 +47,30 @@ class MatchMaker
   end
 
   def add_robots(number_of_players)
-    a_match = nil
-    until a_match do
+    robots = []
+    (number_of_players-1).times do |i|
       robot = RobotUser.create
-      robot.save! # TODO save! necessary only for callback?
-      a_match = match(robot, number_of_players)
-      robot.observe_match(a_match)
-      a_match.save!
+      robot.save!
+      robots << robot
     end
+    a_match = nil
+    robots.each { |robot| a_match = match(robot, number_of_players) }
+    robots.each { |robot| robot.observe_match(a_match) }
+    a_match.save!
+    a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}",
+                                               'match_start_event',
+                                               { match_id: "#{a_match.id}" }) }
+
+    # TODO the code above works, but it's messy; code below NEVER worked
+    # a_match = nil
+    # until a_match do
+    #   robot = RobotUser.create
+    #   robot.save!
+    #   a_match = match(robot, number_of_players)
+    #   robot.observe_match(a_match)
+    #   a_match.save!
+    # end
     #a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { message: "/matches/#{a_match.id}/users/#{user.id}" }) }
-    a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { match_id: "#{a_match.id}" }) }
+    # a_match.users.each { |user| Pusher.trigger("wait_channel_#{user.id}", 'match_start_event', { match_id: "#{a_match.id}" }) }
   end
 end
